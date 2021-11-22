@@ -3,7 +3,7 @@ Clean Code
 
 ## Table of Contents
 
-  1. [Variables](#variables)
+  1. [Meaningful names](#meaningful-names)
   2. [Functions](#functions)
   3. [Objects and Data Structures](#objects-and-data-structures)
   4. [Classes](#classes)
@@ -15,18 +15,18 @@ Clean Code
   10. [Comments](#comments)
   11. [Translations](#translations)
 
-## Variables
+## meaningful-names
 
-### Use meaningful variable names
+### Use intention-Revealing Names
 
-Distinguish names in such a way that the reader knows what the differences offer.
+If the name require a comment, that name does not reveal its intent
 
 **Bad:**
 
 ```ts
-function between<T>(a1: T, a2: T, a3: T): boolean {
-  return a2 <= a1 && a1 <= a3;
-}
+handleStatusChange = (e) => {
+    this.setState({ status: e.currentTaget.value });
+  };
 
 ```
 
