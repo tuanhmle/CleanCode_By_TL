@@ -24,17 +24,17 @@ If the name require a comment, that name does not reveal its intent.
 **Bad:**
 
 ```ts
-handleStatusChange = (e) => {
-    this.setState({ status: e.currentTaget.value });
-};
+d: Date; //elapse time in days
+
 ```
 
 **Good:**
 
 ```ts
-handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ status: e.currentTaget.value });
-};
+elapseTimeInDays: Date;
+daysSinceCreation: Date;
+daySinceModification: Date;
+fileAgeInDays: Date;
 ```
 
 Choosing names that reveal intent can make it much easier to understand and change code
@@ -199,24 +199,20 @@ time = data[0].format(TIME_FORMAT);
 
 ### Avoid Encoding
 
+You also don’t need to prefix member variables with m_ anymore.
+
 **Bad:**
 
 ```ts
-declare const users: Map<string, User>;
-
-for (const keyValue of users) {
-  // iterate through users map
-}
+m_dsc: string;
+g_stu: student[];
 ```
 
 **Good:**
 
 ```ts
-declare const users: Map<string, User>;
-
-for (const [id, user] of users) {
-  // iterate through users map
-}
+decription: string;
+students: student[];
 ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -229,17 +225,112 @@ Explicit is better than implicit.
 **Bad:**
 
 ```ts
-const u = getUser();
-const s = getSubscription();
-const t = charge(u, s);
+const st = getStudent();
+const su = getSubscription();
+const t = charge(st, su);
+
+handleStatusChange = (e) => {
+    this.setState({ status: e.currentTaget.value });
+};
 ```
 
 **Good:**
 
 ```ts
-const user = getUser();
+const student = getStudent();
 const subscription = getSubscription();
-const transaction = charge(user, subscription);
+const transaction = charge(student, subscription);
+
+handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ status: event.currentTaget.value });
+};
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Component names
+
+Components and objects should have noun or noun phrase names like Student, Fragment, and SideBar. Avoid words like Manager, Processor, Data, or Info in the name of a Component. A component name should not be a verb.
+
+**Good:**
+
+```ts
+class PatientCard extends Component
+class ErrorFormField extends Component
+```
+
+### Function names
+
+Methods should have verb or verb phrase names like buildFragment, deleteFragment, or loadData. 
+
+**Good:**
+
+```ts
+buildFragment = () => {
+  // ...
+}
+loadData = () => {
+  // ...
+}
+```
+
+### Don't be cute
+
+Methods should have verb or verb phrase names like buildFragment, deleteFragment, or loadData. 
+
+**Bab:**
+
+```ts
+HolyHandGrenade: item;
+eatMyShorts = () => {
+  // ...
+}
+```
+
+**Good:**
+
+```ts
+deleteItem: item;
+abort = () => {
+  // ...
+}
+```
+**[⬆ back to top](#table-of-contents)**
+
+### Pick One Word per Concept
+
+Pick one word for one abstract concept and stick with it. For instance, it’s confusing to have "fetch", "retrieve", and "get" as equivalent methods of different component (class). It’s confusing to have a "controller" and a "manager" and a "driver" in the same code base.
+
+**[⬆ back to top](#table-of-contents)**
+
+### Don't pun
+
+Avoid using the same word for two purposes. Using the same term for two different ideas is essentially a pun.
+
+**Bad:**
+
+```ts
+add = (number1: nubmer, number2: number) => number1 + number2
+const firstNumber = 1;
+const secondNumber = 2;
+const oldNumber = add(firstNumber, secondNumber);
+
+add = (newNumber: number) => oldNumber + newNumber
+const newNumber = 3;
+const result = add(newNumber);
+```
+
+**Good:**
+
+```ts
+add = (number1: nubmer, number2: number) => number1 + number2
+const firstNumber = 1;
+const secondNumber = 2;
+const oldNumber = add(firstNumber, secondNumber);
+
+insert = (newNumber: number) => oldNumber + newNumber
+const newNumber = 3;
+const result = insert(newNumber);
 ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -251,28 +342,20 @@ If your class/type/object name tells you something, don't repeat that in your va
 **Bad:**
 
 ```ts
-type Car = {
-  carMake: string;
-  carModel: string;
-  carColor: string;
-}
-
-function print(car: Car): void {
-  console.log(`${car.carMake} ${car.carModel} (${car.carColor})`);
+export interface Student {
+  studentFirstName: string;
+  studentLastName: string;
+  studentAge: number;
 }
 ```
 
 **Good:**
 
 ```ts
-type Car = {
-  make: string;
-  model: string;
-  color: string;
-}
-
-function print(car: Car): void {
-  console.log(`${car.make} ${car.model} (${car.color})`);
+export interface Student = {
+  firstName: string;
+  lastName: string;
+  age: number;
 }
 ```
 
@@ -285,74 +368,21 @@ Default arguments are often cleaner than short circuiting.
 **Bad:**
 
 ```ts
-function loadPages(count?: number) {
-  const loadCount = count !== undefined ? count : 10;
-  // ...
+export const scroll = (top? : number) => {
+  window.scrollTo({ top || 0, behavior: 'smooth' });
 }
 ```
 
 **Good:**
 
 ```ts
-function loadPages(count: number = 10) {
-  // ...
+export const scroll = (top = 0) => {
+  window.scrollTo({ top, behavior: 'smooth' });
 }
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
-### Use enum to document the intent
-
-Enums can help you document the intent of the code. For example when we are concerned about values being
-different rather than the exact value of those.
-
-**Bad:**
-
-```ts
-const GENRE = {
-  ROMANTIC: 'romantic',
-  DRAMA: 'drama',
-  COMEDY: 'comedy',
-  DOCUMENTARY: 'documentary',
-}
-
-projector.configureFilm(GENRE.COMEDY);
-
-class Projector {
-  // declaration of Projector
-  configureFilm(genre) {
-    switch (genre) {
-      case GENRE.ROMANTIC:
-        // some logic to be executed 
-    }
-  }
-}
-```
-
-**Good:**
-
-```ts
-enum GENRE {
-  ROMANTIC,
-  DRAMA,
-  COMEDY,
-  DOCUMENTARY,
-}
-
-projector.configureFilm(GENRE.COMEDY);
-
-class Projector {
-  // declaration of Projector
-  configureFilm(genre) {
-    switch (genre) {
-      case GENRE.ROMANTIC:
-        // some logic to be executed 
-    }
-  }
-}
-```
-
-**[⬆ back to top](#table-of-contents)**
 
 ## Functions
 
@@ -381,7 +411,7 @@ This has a few advantages:
 **Bad:**
 
 ```ts
-function createMenu(title: string, body: string, buttonText: string, cancellable: boolean) {
+createMenu = (title: string, body: string, buttonText: string, cancellable: boolean) => {
   // ...
 }
 
@@ -391,7 +421,7 @@ createMenu('Foo', 'Bar', 'Baz', true);
 **Good:**
 
 ```ts
-function createMenu(options: { title: string, body: string, buttonText: string, cancellable: boolean }) {
+createMenu = (options: { title: string, body: string, buttonText: string, cancellable: boolean }) => {
   // ...
 }
 
@@ -403,11 +433,16 @@ createMenu({
 });
 ```
 
-You can further improve readability by using [type aliases](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases):
+You can further improve readability by using [interface](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases):
 
 ```ts
 
-type MenuOptions = { title: string, body: string, buttonText: string, cancellable: boolean };
+export interface MenuOptions { 
+  title: string, 
+  body: string, 
+  buttonText: string, 
+  cancellable: boolean 
+};
 
 function createMenu(options: MenuOptions) {
   // ...
@@ -430,7 +465,7 @@ This is by far the most important rule in software engineering. When functions d
 **Bad:**
 
 ```ts
-function emailClients(clients: Client[]) {
+emailClients = (clients: Client[]) => {
   clients.forEach((client) => {
     const clientRecord = database.lookup(client);
     if (clientRecord.isActive()) {
@@ -443,7 +478,7 @@ function emailClients(clients: Client[]) {
 **Good:**
 
 ```ts
-function emailClients(clients: Client[]) {
+emailClients(clients: Client[]) => {
   clients.filter(isActiveClient).forEach(email);
 }
 
@@ -460,7 +495,7 @@ function isActiveClient(client: Client) {
 **Bad:**
 
 ```ts
-function addToDate(date: Date, month: number): Date {
+addToDate = (date: Date, month: number): Date => {
   // ...
 }
 
@@ -468,17 +503,25 @@ const date = new Date();
 
 // It's hard to tell from the function name what is added
 addToDate(date, 1);
+
+build = () => {
+  // ...
+}
 ```
 
 **Good:**
 
 ```ts
-function addMonthToDate(date: Date, month: number): Date {
+addMonthToDate = (date: Date, month: number): Date => {
   // ...
 }
 
 const date = new Date();
 addMonthToDate(date, 1);
+
+buildFormField = () => {
+  // ...
+}
 ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -490,7 +533,7 @@ When you have more than one level of abstraction your function is usually doing 
 **Bad:**
 
 ```ts
-function parseCode(code: string) {
+parseCode = (code: string) => {
   const REGEXES = [ /* ... */ ];
   const statements = code.split(' ');
   const tokens = [];
@@ -517,7 +560,7 @@ function parseCode(code: string) {
 ```ts
 const REGEXES = [ /* ... */ ];
 
-function parseCode(code: string) {
+parseCode = (code: string) => {
   const tokens = tokenize(code);
   const syntaxTree = parse(tokens);
 
@@ -526,7 +569,7 @@ function parseCode(code: string) {
   });
 }
 
-function tokenize(code: string): Token[] {
+tokenize = (code: string): Token[] => {
   const statements = code.split(' ');
   const tokens: Token[] = [];
 
@@ -539,7 +582,7 @@ function tokenize(code: string): Token[] {
   return tokens;
 }
 
-function parse(tokens: Token[]): SyntaxTree {
+parse = (tokens: Token[]): SyntaxTree => {
   const syntaxTree: SyntaxTree[] = [];
   tokens.forEach((token) => {
     syntaxTree.push( /* ... */ );
@@ -567,7 +610,7 @@ Getting the abstraction right is critical, that's why you should follow the [SOL
 **Bad:**
 
 ```ts
-function showDeveloperList(developers: Developer[]) {
+showDeveloperList = (developers: Developer[]) => {
   developers.forEach((developer) => {
     const expectedSalary = developer.calculateExpectedSalary();
     const experience = developer.getExperience();
@@ -583,7 +626,7 @@ function showDeveloperList(developers: Developer[]) {
   });
 }
 
-function showManagerList(managers: Manager[]) {
+showManagerList(managers: Manager[]) => {
   managers.forEach((manager) => {
     const expectedSalary = manager.calculateExpectedSalary();
     const experience = manager.getExperience();
