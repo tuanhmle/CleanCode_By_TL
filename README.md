@@ -15,98 +15,189 @@ Clean Code
   10. [Comments](#comments)
   11. [Translations](#translations)
 
-## meaningful-names
+## Meaningful names
 
 ### Use intention-Revealing Names
 
-If the name require a comment, that name does not reveal its intent
+If the name require a comment, that name does not reveal its intent.
 
 **Bad:**
 
 ```ts
 handleStatusChange = (e) => {
     this.setState({ status: e.currentTaget.value });
-  };
-
+};
 ```
 
 **Good:**
 
 ```ts
-function between<T>(value: T, left: T, right: T): boolean {
-  return left <= value && value <= right;
-}
+handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ status: e.currentTaget.value });
+};
 ```
 
-**[⬆ back to top](#table-of-contents)**
-
-### Use pronounceable variable names
-
-If you can’t pronounce it, you can’t discuss it without sounding like an idiot.
+Choosing names that reveal intent can make it much easier to understand and change code
 
 **Bad:**
 
 ```ts
-type DtaRcrd102 = {
-  genymdhms: Date;
-  modymdhms: Date;
-  pszqint: number;
-}
+var getThem = () => {
+  let list1: Array<number[]> = [];
+  theList.forEach((x) => {
+    if (x[0] == 4) list1.push(x);
+  });
+  return list1;
+};
 ```
 
-**Good:**
+**Improve 1:**
 
 ```ts
-type Customer = {
-  generationTimestamp: Date;
-  modificationTimestamp: Date;
-  recordId: number;
-}
+var getFlaggedCells = () => {
+  var flaggedCells: Array<number[]> = [];
+  gameBoard.forEach((cell: number[]) => {
+    if (cell[STATUS_VALUE] == FLAGGED) flaggedCells.push(cell);
+  });
+  return flaggedCells;
+};
+```
+
+**Improve 2:**
+
+```ts
+var getFlaggedCells = () => {
+  var flaggedCells: Array<Cell> = [];
+  gameBoard.forEach((cell: Cell) => {
+    if (cell.isFlagger()) flaggedCells.push(cell);
+  });
+  return flaggedCells;
+};
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
-### Use the same vocabulary for the same type of variable
+### Avoid disinformation
+
+We should avoid words whose entrenched meanings vary from our intended meaning.
 
 **Bad:**
 
 ```ts
-function getUserInfo(): User;
-function getUserDetails(): User;
-function getUserData(): User;
+export interface Student {
+  fn: string;
+  ln: string;
+  em: string;
+}
 ```
 
 **Good:**
 
 ```ts
-function getUser(): User;
+export interface Student {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+```
+
+Do not refer to a grouping of students as an studentList unless it’s actually a List
+
+**Bad:**
+
+```ts
+studentList: Student[];
+```
+
+**Good**
+
+```ts
+studentGroup: Student[];
+bunchOfStudent: Student[];
+students: Student[];
+```
+A truly awful example of disinformative names would be the use of lower-case L or uppercase O as variable names, especially in combination. The problem, of course, is that they look almost entirely like the constants one and zero, respectively.
+
+**Bad:**
+
+```ts
+const a = 1;
+if (O == l) a = O1;
+else l = 01;
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Make meaningful distinctions
+
+In the absence of specific conventions, the variable "moneyAmount" is indistinguishable from "money", "customerInfo" is indistinguishable from "customer", "accountData" is indistinguishable from "account", and "theMessage" is indistinguishable from "message. Distinguish names in
+such a way that the reader knows what the differences offer.
+
+**Bad:**
+
+```ts
+getStudentInfo(): Student;
+getStudentDetails(): Student;
+getStudentData(): Student;
+```
+
+**Good:**
+
+```ts
+getStudent(): Student;
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Use Pronounceable Names
+
+**Bad:**
+
+```ts
+fras: [];
+stus: [];
+pNum: 1234;
+```
+
+**Good:**
+
+```ts
+fragments: [];
+students: [];
+phoneNumber: 1234;
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ### Use searchable names
 
-We will read more code than we will ever write. It's important that the code we do write must be readable and searchable. By *not* naming variables that end up being meaningful for understanding our program, we hurt our readers. Make your names searchable. Tools like [ESLint](https://typescript-eslint.io/) can help identify unnamed constants.
+We will read more code than we will ever write. It's important that the code we do write must be readable and searchable. By *not* naming variables that end up being meaningful for understanding our program, we hurt our readers. Make your names searchable. Tools like [ESLint](https://typescript-eslint.io/) can help identify unnamed constants. If a variable or constant might be seen or used in multiple places in a body of code, it is imperative to give it a search-friendly name. Extension "Code Spell Checker" may help check spell in code for someone need [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 
 **Bad:**
 
 ```ts
-// What the heck is 86400000 for?
-setTimeout(restart, 86400000);
+updateError = () => delay(() => this.setState({ hasError: this.props.hasError, message: this.props.message }), 200);
+date = data[0].format('MM-DD-YYYY')
+time = data[0].format('HH:mm')
 ```
 
 **Good:**
 
 ```ts
-// Declare them as capitalized named constants.
-const MILLISECONDS_IN_A_DAY = 24 * 60 * 60 * 1000;
+export const Validation = {
+  ERROR_DELAY_TIME: 200
+};
+export const DATE_FORMAT = 'MM-DD-YYYY';
+export const TIME_FORMAT = 'HH:mm';
 
-setTimeout(restart, MILLISECONDS_IN_A_DAY);
+updateError = () => delay(() => this.setState({ hasError: this.props.hasError, message: this.props.message }), Validation.ERROR_DELAY_TIME);
+date = data[0].format(DATE_FORMAT);
+time = data[0].format(TIME_FORMAT);
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
-### Use explanatory variables
+### Avoid Encoding
 
 **Bad:**
 
