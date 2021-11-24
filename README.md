@@ -5,13 +5,10 @@ Clean Code
 
   1. [Meaningful names](#meaningful-names)
   2. [Functions](#functions)
-  3. [Objects and Data Structures](#objects-and-data-structures)
   4. [Testing](#testing)
-  7. [Concurrency](#concurrency)
-  8. [Error Handling](#error-handling)
-  9. [Formatting](#formatting)
-  10. [Comments](#comments)
-  11. [Translations](#translations)
+  5. [Concurrency](#concurrency)
+  6. [Formatting](#formatting)
+  7. [Comments](#comments)
 
 ## Meaningful names
 
