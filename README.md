@@ -361,7 +361,7 @@ export interface Student = {
 
 ## Functions
 
-### Function arguments (2 or fewer ideally)
+### Function Arguments (2 or fewer ideally)
 
 Limiting the number of function parameters is incredibly important because it makes testing your function easier.
 Having more than three leads to a combinatorial explosion where you have to test tons of different cases with each separate argument.  
