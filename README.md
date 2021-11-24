@@ -356,28 +356,6 @@ export interface Student = {
 
 **[⬆ back to top](#table-of-contents)**
 
-### Use default arguments instead of short circuiting or conditionals
-
-Default arguments are often cleaner than short circuiting.
-
-**Bad:**
-
-```ts
-export const scroll = (top? : number) => {
-  window.scrollTo({ top || 0, behavior: 'smooth' });
-}
-```
-
-**Good:**
-
-```ts
-export const scroll = (top = 0) => {
-  window.scrollTo({ top, behavior: 'smooth' });
-}
-```
-
-**[⬆ back to top](#table-of-contents)**
-
 
 ## Functions
 
@@ -698,6 +676,28 @@ const textAreas = [
 ```
 
 You should be critical about code duplication. Sometimes there is a tradeoff between duplicated code and increased complexity by introducing unnecessary abstraction. When two implementations from two different modules look similar but live in different domains, duplication might be acceptable and preferred over extracting the common code. The extracted common code, in this case, introduces an indirect dependency between the two modules.
+
+**[⬆ back to top](#table-of-contents)**
+
+### Use default arguments instead of short circuiting or conditionals
+
+Default arguments are often cleaner than short circuiting.
+
+**Bad:**
+
+```ts
+export const scroll = (top? : number) => {
+  window.scrollTo({ top || 0, behavior: 'smooth' });
+}
+```
+
+**Good:**
+
+```ts
+export const scroll = (top = 0) => {
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+```
 
 **[⬆ back to top](#table-of-contents)**
 
