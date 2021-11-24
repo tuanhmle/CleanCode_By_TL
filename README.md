@@ -146,6 +146,8 @@ getStudent(): Student;
 
 ### Use Pronounceable Names
 
+Humans are good at words. A significant part of our brains is dedicated to the concept of words. And words are, by definition, pronounceable. It would be a shame not to take advantage of that huge portion of our brains that has evolved to deal with spoken language. So make your names pronounceable.
+
 **Bad:**
 
 ```ts
