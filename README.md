@@ -273,7 +273,7 @@ loadData = () => {
 
 ### Don't Be Cute
 
-Methods should have verb or verb phrase names like buildFragment, deleteFragment, or loadData. 
+If names are too clever, they will be memorable only to people who share the author’s sense of humor, and only as long as these people remember the joke. Will they know what the function named HolyHandGrenade is supposed to do? Sure, it’s cute, but maybe in this case DeleteItems might be a better name. Choose clarity over entertainment value.
 
 **Bab:**
 
