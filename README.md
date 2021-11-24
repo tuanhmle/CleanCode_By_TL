@@ -3,16 +3,16 @@ Clean Code
 
 ## Table of Contents
 
-  1. [Meaningful names](#meaningful-names)
+  1. [Meaningful Names](#meaningful-names)
   2. [Functions](#functions)
   4. [Testing](#testing)
   5. [Concurrency](#concurrency)
   6. [Formatting](#formatting)
   7. [Comments](#comments)
 
-## Meaningful names
+## Meaningful Names
 
-### Use intention-Revealing Names
+### Use Intention-Revealing Names
 
 If the name require a comment, that name does not reveal its intent.
 
@@ -72,7 +72,7 @@ var getFlaggedCells = () => {
 
 **[⬆ back to top](#table-of-contents)**
 
-### Avoid disinformation
+### Avoid Disinformation
 
 We should avoid words whose entrenched meanings vary from our intended meaning.
 
@@ -123,7 +123,7 @@ else l = 01;
 
 **[⬆ back to top](#table-of-contents)**
 
-### Make meaningful distinctions
+### Make Meaningful Distinctions
 
 In the absence of specific conventions, the variable "moneyAmount" is indistinguishable from "money", "customerInfo" is indistinguishable from "customer", "accountData" is indistinguishable from "account", and "theMessage" is indistinguishable from "message. Distinguish names in
 such a way that the reader knows what the differences offer.
@@ -164,7 +164,7 @@ phoneNumber: 1234;
 
 **[⬆ back to top](#table-of-contents)**
 
-### Use searchable names
+### Use Searchable Names
 
 We will read more code than we will ever write. It's important that the code we do write must be readable and searchable. By *not* naming variables that end up being meaningful for understanding our program, we hurt our readers. Make your names searchable. Tools like [ESLint](https://typescript-eslint.io/) can help identify unnamed constants. If a variable or constant might be seen or used in multiple places in a body of code, it is imperative to give it a search-friendly name. Extension "Code Spell Checker" may help check spell in code for someone need [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 
@@ -243,7 +243,7 @@ handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
 **[⬆ back to top](#table-of-contents)**
 
-### Component names
+### Component Names
 
 Components and objects should have noun or noun phrase names like Student, Fragment, and SideBar. Avoid words like Manager, Processor, Data, or Info in the name of a Component. A component name should not be a verb.
 
@@ -254,7 +254,7 @@ class PatientCard extends Component
 class ErrorFormField extends Component
 ```
 
-### Function names
+### Function Names
 
 Methods should have verb or verb phrase names like buildFragment, deleteFragment, or loadData. 
 
@@ -269,7 +269,7 @@ loadData = () => {
 }
 ```
 
-### Don't be cute
+### Don't Be Cute
 
 Methods should have verb or verb phrase names like buildFragment, deleteFragment, or loadData. 
 
@@ -292,13 +292,13 @@ abort = () => {
 ```
 **[⬆ back to top](#table-of-contents)**
 
-### Pick One Word per Concept
+### Pick One Word Per Concept
 
 Pick one word for one abstract concept and stick with it. For instance, it’s confusing to have "fetch", "retrieve", and "get" as equivalent methods of different component (class). It’s confusing to have a "controller" and a "manager" and a "driver" in the same code base.
 
 **[⬆ back to top](#table-of-contents)**
 
-### Don't pun
+### Don't Pun
 
 Avoid using the same word for two purposes. Using the same term for two different ideas is essentially a pun.
 
@@ -330,7 +330,7 @@ const result = insert(newNumber);
 
 **[⬆ back to top](#table-of-contents)**
 
-### Don't add unneeded context
+### Don't Add Unneeded Context
 
 If your class/type/object name tells you something, don't repeat that in your variable name.
 
@@ -431,7 +431,7 @@ createMenu({
 
 **[⬆ back to top](#table-of-contents)**
 
-### Functions should do one thing
+### Functions Should Do One Thing
 
 This is by far the most important rule in software engineering. When functions do more than one thing, they are harder to compose, test, and reason about. When you can isolate a function to just one action, it can be refactored easily and your code will read much cleaner. If you take nothing else away from this guide other than this, you'll be ahead of many developers.
 
@@ -463,7 +463,7 @@ function isActiveClient(client: Client) {
 
 **[⬆ back to top](#table-of-contents)**
 
-### Function names should say what they do
+### Function Names Should Say What They Do
 
 **Bad:**
 
@@ -499,7 +499,7 @@ buildFormField = () => {
 
 **[⬆ back to top](#table-of-contents)**
 
-### Functions should only be one level of abstraction
+### Functions Should Only Be One Level Of Abstraction
 
 When you have more than one level of abstraction your function is usually doing too much. Splitting up functions leads to reusability and easier testing.
 
@@ -567,7 +567,7 @@ parse = (tokens: Token[]): SyntaxTree => {
 
 **[⬆ back to top](#table-of-contents)**
 
-### Remove duplicate code
+### Remove Duplicate Code
 
 Do your absolute best to avoid duplicate code.
 Duplicate code is bad because it means that there's more than one place to alter something if you need to change some logic.  
@@ -679,7 +679,7 @@ You should be critical about code duplication. Sometimes there is a tradeoff bet
 
 **[⬆ back to top](#table-of-contents)**
 
-### Use default arguments instead of short circuiting or conditionals
+### Use Default Arguments Instead Of Short Circuiting Or Conditionals
 
 Default arguments are often cleaner than short circuiting.
 
@@ -701,7 +701,7 @@ export const scroll = (top = 0) => {
 
 **[⬆ back to top](#table-of-contents)**
 
-### Set default objects with Object.assign or destructuring
+### Set Default Objects With Object.assign Or Destructuring
 
 **Bad:**
 
@@ -854,7 +854,7 @@ addItemToCart(cart: CartItem[], item: Item): CartItem[] => produce(cart, (draft)
 
 **[⬆ back to top](#table-of-contents)**
 
-### Don't over-optimize
+### Don't Over-Optimize
 
 Modern browsers do a lot of optimization under-the-hood at runtime. A lot of times, if you are optimizing then you are just wasting your time. There are good [resources](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers) for seeing where optimization is lacking. Target those in the meantime, until they are fixed if they can be.
 
@@ -878,7 +878,7 @@ for (let i = 0; i < list.length; i++) {
 
 **[⬆ back to top](#table-of-contents)**
 
-### Remove dead code
+### Remove Dead Code
 
 Dead code is just as bad as duplicate code. There's no reason to keep it in your codebase.
 If it's not being called, get rid of it! It will still be safe in your version history if you still need it.
@@ -1292,7 +1292,7 @@ import { ConfigPlugin } from './plugins/config/configPlugin';
 
 **[⬆ back to top](#table-of-contents)**
 
-### Use typescript aliases
+### Use Typescript Aliases
 
 Create prettier imports by defining the paths and baseUrl properties in the compilerOptions section in the `tsconfig.json`
 
@@ -1479,7 +1479,7 @@ Keep in mind however that a *TODO* comment is not an excuse for bad code.
 **Bad:**
 
 ```ts
-function getActiveSubscriptions(): Promise<Subscription[]> {
+getActiveSubscriptions = (): Promise<Subscription[]> => {
   // ensure `dueDate` is indexed.
   return db.subscriptions.find({ dueDate: { $lte: new Date() } });
 }
@@ -1488,7 +1488,7 @@ function getActiveSubscriptions(): Promise<Subscription[]> {
 **Good:**
 
 ```ts
-function getActiveSubscriptions(): Promise<Subscription[]> {
+getActiveSubscriptions = (): Promise<Subscription[]> => {
   // TODO: ensure `dueDate` is indexed.
   return db.subscriptions.find({ dueDate: { $lte: new Date() } });
 }
