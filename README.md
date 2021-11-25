@@ -1,5 +1,9 @@
 # CleanCode_By_TL
+
 Clean Code
+
+Software engineering principles, from Robert C. Martin's book Clean Code
+[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)
 
 ## Table of Contents
 
