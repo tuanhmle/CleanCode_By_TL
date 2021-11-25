@@ -836,7 +836,7 @@ Two caveats to mention to this approach:
 **Bad:**
 
 ```ts
-addItemToCart(cart: CartItem[], item: Item): void {
+addItemToCart = (cart: CartItem[], item: Item): void => {
   cart.push({ item, date: Date.now() });
 };
 ```
@@ -844,7 +844,7 @@ addItemToCart(cart: CartItem[], item: Item): void {
 **Good:**
 
 ```ts
-addItemToCart(cart: CartItem[], item: Item): CartItem[] {
+addItemToCart = (cart: CartItem[], item: Item): CartItem[] => {
   return [...cart, { item, date: Date.now() }];
 };
 ```
